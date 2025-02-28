@@ -95,7 +95,7 @@ class InContextDiT(BaseDiT):
         mask = torch.cat([torch.ones(bs, n_y, device=y.device), mask], dim=1)
         # ----------------------------------------------------------------------------- #
         # Complete this part for `Code 3`
-        # x = ...
+        x = torch.cat([y, x], dim=1)
         # ----------------------------------------------------------------------------- #
         for block in self.backbone_module:
             x = block(x, mask)
@@ -105,7 +105,7 @@ class InContextDiT(BaseDiT):
         num_y = y.shape[1]
         # ----------------------------------------------------------------------------- #
         # Complete this part for `Code 3`
-        # x = ...
+        x = x[:, num_y:]
         # ----------------------------------------------------------------------------- #
         return self.final_linear(self.final_norm(x))
 

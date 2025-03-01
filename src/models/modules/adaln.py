@@ -126,7 +126,6 @@ class AdaLNSABlock(nn.Module):
 def modulate_shift_and_scale(x: Tensor, shift: Tensor, scale: Tensor) -> Tensor:
     # ----------------------------------------------------------------------------- #
     # Complete this part for `Code 4`
-    # 计算均值和标准差 (LayerNorm 操作)
     x = x * (scale.unsqueeze(1) + 1) + shift.unsqueeze(1)
     # ----------------------------------------------------------------------------- #
     return x

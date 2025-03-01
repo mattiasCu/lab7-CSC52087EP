@@ -237,13 +237,13 @@ class CrossAttentionDiT(BaseDiT):
         cond_emb = self.cond_projection(cond)
         # ----------------------------------------------------------------------------- #
         # Complete this part for `Code 5`
-        # cond_emb = ...
+        cond_emb = torch.cat([t.unsqueeze(1), cond_emb], dim=1)
         # ----------------------------------------------------------------------------- #
         cond_emb = self.cond_positional_embedding(cond_emb)
         # ----------------------------------------------------------------------------- #
         # Complete this part for `Code 5`
-        # ... self.cond_sa
-        #     cond_emb = ...
+        for block in self.cond_sa:
+            cond_emb = block(cond_emb, None) # No mask for condotion embedding
         # ----------------------------------------------------------------------------- #
         return cond_emb
 

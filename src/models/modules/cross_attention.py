@@ -108,8 +108,8 @@ class CrossAttentionSABlock(nn.Module):
         # Complete this part for `Code 5`
         normed_tokens = self.ca_ln(tokens)
         ca_output = self.ca(
-            # ...,
-            # ...,
+            normed_tokens,  # Queries from tokens
+            cond,
             attention_mask=cond_attention_mask,
         )
         # ----------------------------------------------------------------------------- #

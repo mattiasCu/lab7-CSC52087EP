@@ -56,8 +56,8 @@ class DDIMSampler(nn.Module):
             # x0 prediction
             # ------------------------------------------------------------------------- #
             # Complete this part for `Code 8`
-            # noise_pred = ...
-            # x_next = ...
+            noise_pred = (x_cur - torch.sqrt(g_cur) * x0) / torch.sqrt(1 - g_cur)
+            x_next = torch.sqrt(g_next) * x0 + torch.sqrt(1 - g_next) * noise_pred
             # ------------------------------------------------------------------------- #
 
             x_cur = x_next

@@ -26,9 +26,9 @@ def _compute_fd(mu1: Tensor, sigma1: Tensor, mu2: Tensor, sigma2: Tensor) -> Ten
     """
     # --------------------------------------------------------------------------------- #
     # Complete this part for `Code 10`
-    # a = ...
-    # b = ...
-    # c = torch.linalg.eigvals(...).sqrt().real.sum(dim=-1)
+    a = torch.sum((mu1 - mu2) ** 2)
+    b = torch.trace(sigma1) + torch.trace(sigma2)
+    c = torch.linalg.eigvals(sigma1 @ sigma2).sqrt().real.sum(dim=-1)
     # --------------------------------------------------------------------------------- #
     return a + b - 2 * c
 

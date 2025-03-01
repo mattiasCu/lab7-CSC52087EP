@@ -243,7 +243,7 @@ class CrossAttentionDiT(BaseDiT):
         # ----------------------------------------------------------------------------- #
         # Complete this part for `Code 5`
         for block in self.cond_sa:
-            cond_emb = block(cond_emb, None) # No mask for condotion embedding
+            cond_emb = block(cond_emb, None)
         # ----------------------------------------------------------------------------- #
         return cond_emb
 

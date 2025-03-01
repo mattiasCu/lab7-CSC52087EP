@@ -127,20 +127,7 @@ def modulate_shift_and_scale(x: Tensor, shift: Tensor, scale: Tensor) -> Tensor:
     # ----------------------------------------------------------------------------- #
     # Complete this part for `Code 4`
     # 计算均值和标准差 (LayerNorm 操作)
-    mean = x.mean(dim=-1, keepdim=True)
-    std = x.std(dim=-1, keepdim=True, unbiased=False)
-
-    # 归一化
-    x = (x - mean) / (std + 1e-6)  # 避免除零错误
-
-    # **确保 shift 和 scale 形状匹配 x**
-    if shift.shape[1] != x.shape[1]:
-        shift = shift.unsqueeze(1).expand(-1, x.shape[1], -1)
-    if scale.shape[1] != x.shape[1]:
-        scale = scale.unsqueeze(1).expand(-1, x.shape[1], -1)
-
-    # 进行 AdaLN 调整
-    x = x * scale + shift
+    x = x * (scale.unsqueeze(1) + 1) + shift.unsqueeze(1)
     # ----------------------------------------------------------------------------- #
     return x
 

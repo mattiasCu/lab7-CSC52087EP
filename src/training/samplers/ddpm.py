@@ -59,10 +59,9 @@ class DDPMSampler(nn.Module):
             # x0 prediction (g --> \bar{alpha})
             # ------------------------------------------------------------------------- #
             # Complete this part for `Code 7`
-            # Compute the mean of the posterior distribution
             var_t = (1 - g_next) * (1 - alpha_cur) / (1 - g_cur)
-            x_mean = torch.sqrt(g_next) * x0 + torch.sqrt(1 - g_next - var_t) * (
-                        x_cur - torch.sqrt(g_cur) * x0) / torch.sqrt(1 - g_cur)
+            x_mean = (torch.sqrt(alpha_cur) * (1 - g_next) * x_cur + torch.sqrt(g_next) * (1 - alpha_cur) * x0) / (
+                        1 - g_cur)
             x_next = x_mean + randn_like(x_cur) * torch.sqrt(var_t)
             # ------------------------------------------------------------------------- #
 

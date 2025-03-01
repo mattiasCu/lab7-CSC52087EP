@@ -34,8 +34,7 @@ class DDPMLoss:
         # ------------------------------------------------------------------------- #
         # Complete this part for `Code 6`
         # Step 1: Apply noise to data using gamma
-        data_n = data + gamma * n  # Add noise according to scheduler
-        # Step 2: Predict the noise using the model
+        data_n = gamma * data + torch.sqrt(1.0 - gamma ** 2) * n  # Add noise according to scheduler
         # Step 2: Predict the noise using the model
         D_yn = net(gamma, data_n, conds, mask)  # Model predicts noise
         # Step 3: Compute loss (L2 loss between predicted and actual noise)

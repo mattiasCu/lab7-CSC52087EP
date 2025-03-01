@@ -33,11 +33,13 @@ class DDPMLoss:
         n = torch.randn_like(data)
         # ------------------------------------------------------------------------- #
         # Complete this part for `Code 6`
-        # data_n = ...
-        # Denoise
-        # D_yn = ...
-        # Compute loss
-        # loss = ...
+        # Step 1: Apply noise to data using gamma
+        data_n = data + gamma * n  # Add noise according to scheduler
+        # Step 2: Predict the noise using the model
+        # Step 2: Predict the noise using the model
+        D_yn = net(gamma, data_n, conds, mask)  # Model predicts noise
+        # Step 3: Compute loss (L2 loss between predicted and actual noise)
+        loss = torch.nn.functional.mse_loss(D_yn, n)
         # ------------------------------------------------------------------------- #
 
         return loss
